@@ -26,4 +26,4 @@ jobs:
     # Push Docker Image to Docker Hub
     - name: Push Docker image to Docker Hub
       run: |
-        docker push cps2naveen-parking-backend:latest
+        docker image push cps2naveen-parking-backend:latest
