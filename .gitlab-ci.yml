@@ -1,0 +1,25 @@
+stages:
+  - build
+  - publish
+
+dockerize:
+  stage: build
+  script:
+    - echo "== set the enviroment based on the branch name =="
+    - DOCKER_TAG=dev
+    - if [ $CI_COMMIT_BRANCH = "staging" ]; then DOCKER_TAG=staging; fi
+    - if [ $CI_COMMIT_BRANCH = "main" ]; then DOCKER_TAG=main${CI_COMMIT_SHA}; fi
+    - echo "== Deploy Container =="
+    - DOCKER_BUILDKIT=0 docker build -t $CI_REGISTRY/qanswer-app/qanswer-freetext:$DOCKER_TAG -f Dockerfile .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY/qanswer-app/qanswer-freetext:$DOCKER_TAG
+    - docker tag $CI_REGISTRY/qanswer-app/qanswer-freetext:$DOCKER_TAG $CI_REGISTRY/qanswer-app/qanswer-freetext:$CI_COMMIT_BRANCH
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY/qanswer-app/qanswer-freetext:$CI_COMMIT_BRANCH
+    - echo "== All Done :) =="
+  needs: [ ]
+  only:
+    - dev
+    - staging
+    - main
+
