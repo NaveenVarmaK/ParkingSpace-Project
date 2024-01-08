@@ -1,0 +1,46 @@
+services:
+  frontend:
+    build:
+      context: ./parkingspace
+      dockerfile: Dockerfile
+      args: 
+        - SPRINGBOOT_PORT=${SPRINGBOOT_PORT}
+        - FRONTEND_PORT=${FRONTEND_PORT}
+    env_file:
+      - .env
+    environment:
+      - SPRINGBOOT_PORT=${SPRINGBOOT_PORT}
+      - FRONTEND_PORT=${FRONTEND_PORT}
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+
+  backend:
+    build:
+      context: ./parking_backend
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+        - postgres
+    environment:
+        - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres'
+        - 'SPRING_DATASOURCE_USERNAME=postgres'
+        - 'SPRING_DATASOURCE_PASSWORD=postgres'
+        - 'SPRING_JPA_HIBERNATE_DDL_AUTO=update'
+    ports: 
+        - "${SPRINGBOOT_PORT}:${SPRINGBOOT_PORT}"
+
+  postgres:
+    image: 'postgres:latest'
+    container_name: 'postgres'
+    environment:
+      - 'POSTGRES_DB=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
