@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build ./parkingspace --file ./parkingspace/Dockerfile --tag cps2naveen-parking-backend:$(date +%s)
+      run: docker build ./parkingspace --file ./parkingspace/Dockerfile --tag cps2naveen-parking-backend:latest
 
     - name: Login to Docker Hub
       uses: docker/login-action@v1
@@ -26,4 +26,4 @@ jobs:
     # Push Docker Image to Docker Hub
     - name: Push Docker image to Docker Hub
       run: |
-        docker push cps2naveen-parking-backend:$(date +%s)
+        docker push cps2naveen-parking-backend:latest
