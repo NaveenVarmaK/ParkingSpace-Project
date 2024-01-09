@@ -46,6 +46,12 @@ jobs:
         with:
           node-version: '14'
 
+      # Configure Git identity
+      - name: Configure Git identity
+        run: |
+          git config user.email "knaveenv@outlook.com"
+          git config user.name "NaveenVarmaK"
+
       # Install standard-version
       - name: Install standard-version
         run: npm install -g standard-version
