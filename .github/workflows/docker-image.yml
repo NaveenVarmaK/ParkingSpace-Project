@@ -63,7 +63,7 @@ jobs:
       # Push changelog and version bump back to the repository
       - name: Push changes back to the repository
         run: |
-          git remote add origin_with_token https://$Actions_Permission_Token@$github.com/NaveenVarmaK/ParkingSpace-Project.git
+          git remote add origin_with_token https://$Actions_Permission_Token@github.com/NaveenVarmaK/ParkingSpace-Project.git
           git push origin main --follow-tags
 
       # Login to Docker Hub
