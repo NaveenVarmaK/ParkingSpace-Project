@@ -1,2 +1,0 @@
-http://localhost:8080/swagger-ui/index.html
-sudo docker compose -f compose.yaml up
