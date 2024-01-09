@@ -63,8 +63,6 @@ jobs:
       # Push changelog and version bump back to the repository
       - name: Push changes back to the repository
         run: |
-          git config user.email "knaveenv@outlook.com"
-          git config user.name "NaveenVarmaK"
           git remote add origin_with_token https://$ACTIONS_PERMISSION_TOKEN@github.com/NaveenVarmaK/ParkingSpace-Project.git
           git push origin main --follow-tags
 
