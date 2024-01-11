@@ -1,4 +1,4 @@
-# Parking Management System
+Parking Management System
 
 A comprehensive Parking Management System built with Spring Boot for the backend and Vue.js for the frontend, backend by PostgreSQL[^1^][1].
 
@@ -21,6 +21,7 @@ The Parking Management System is a robust solution for efficiently managing park
 
     * The Vue.js frontend is designed mainly based on the assignment for Cours Dev Web TP 4 - VueJS. I implemented the tasks in my front-end.
     * Implemented Junit testing and API Integration testing for the backend Spring boot.
+    * For the backend of the project, I used PostgreSQL and Spring Boot. There might be a chance that the database is empty when it reaches your system, but I am sure that all the APIs and the functions are working.
 
 ## Features
 
@@ -112,8 +113,30 @@ sudo docker compose build frontend
 
 The services will be accessible at:
 
-- Backend: http://localhost:8084
+- Backend: http://localhost:8084/swagger-ui/index.html#/
 - Frontend: http://localhost:8080
+
+
+## Clever Cloud Deployment
+
+### Backend
+
+```Link To Clever Cloud Backend
+http://app-5096ec83-dfe7-4bc8-8f43-59f96c0d12f7.cleverapps.io/swagger-ui/index.html#/
+```
+
+**Note:**
+
+    * I started building this project using Docker, but when I tried to implement the Docker backend to the Clever Cloud, I found out that Docker is not yet completely supported on Clever Cloud, or Compose OS sort. Therefore, I implemented my backend separately in a different Git repository, which is not yet linked to this project, but it is the same backend with the name “CleverCloud-Backend” (app_5096ec83-dfe7-4bc8-8f43-59f96c0d12f7).
+
+
+```Link To See CleverCloud Documentation
+https://developers.clever-cloud.com/doc/applications/docker/
+```
+
+```Link To See Backend Repository for the CleverCloud Deployment
+https://github.com/NaveenVarmaK/CleverCloud-Backend.git
+```
 
 ## To Activate checkstyle-profile
 
@@ -134,6 +157,22 @@ spring.datasource.url=jdbc:postgresql://postgres:5432/postgres
 spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
 
 
+![Screenshot from 2024-01-11 18-08-18](https://github.com/NaveenVarmaK/ParkingSpace-Project/assets/64104378/52133e22-c174-4ffd-a4f8-7010cba093b7)
+
+![Screenshot from 2024-01-05 20-45-29](https://github.com/NaveenVarmaK/ParkingSpace-Project/assets/64104378/c15ed63c-e4e4-4ac2-a48e-0917214f9f00)
+
+
+## Mobile App Development
+
+```Link to the Mobile App Development Repository
+https://github.com/NaveenVarmaK/ParkingSpace-Mobile-App.git
+```
+
+**Note:**
+
+    * The Mobile App for this Project is not completely Developed
+
+
 ## Contributing
 
 Contributions are welcome![^10^][10] Please follow the [Contribution Guidelines](CONTRIBUTING.md)[^11^][11].
@@ -144,4 +183,4 @@ This project is licensed under the [GNU General Public License v3.0](LICENSE)[^1
 
 ## Acknowledgments
 
-Special thanks to the Spring Boot and Vue.js communities for their support[^13^][13].
+Special thanks to the Spring Boot and Vue.js communities for their support[^13^][13]."
