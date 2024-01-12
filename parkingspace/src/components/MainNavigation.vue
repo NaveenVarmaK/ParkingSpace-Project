@@ -1,16 +1,16 @@
 <template>
-  <ul class="nav nav-tabs" style="align-items: center;" >
+  <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link" :class="{ active: activeTab === 'parking' }" href="#" @click="showParkingLocations">Parking Locations</a>
+      <a class="nav-link" :class="{ active: activeTab === 'parking' }" href="#" @click="showParkingLocations" :style="{ color: activeTab === 'parking' ? ' #5c6ac4' : 'white' }">Parking Locations</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" :class="{ active: activeTab === 'createParking' }" href="#" @click="showCreateParkingSlots">Create Parking Slots</a>
+      <a class="nav-link" :class="{ active: activeTab === 'createParking' }" href="#" @click="showCreateParkingSlots" :style="{ color: activeTab === 'createParking' ? ' #5c6ac4' : 'white' }">Create Parking Slots</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" :class="{ active: activeTab === 'bookings' }" href="#" @click="showBookings">Bookings</a>
+      <a class="nav-link" :class="{ active: activeTab === 'bookings' }" href="#" @click="showBookings" :style="{ color: activeTab === 'bookings' ? ' #5c6ac4' : 'white' }">Bookings</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" :class="{ active: activeTab === 'Users' }" href="#" @click="showUsers">Users</a>
+      <a class="nav-link" :class="{ active: activeTab === 'Users' }" href="#" @click="showUsers" :style="{ color: activeTab === 'Users' ? ' #5c6ac4' : 'white' }">Users</a>
     </li>
     <div v-if="activeTab === 'parking'">
       <ParkingLocations />

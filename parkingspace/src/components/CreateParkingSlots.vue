@@ -2,7 +2,7 @@
   <div class="Parking-Slot">
     <div>
       <!-- <h3>Create New Parking Location</h3> -->
-      <form @submit.prevent="createSlot" class="container" style="max-width: 750px;">
+      <form @submit.prevent="createSlot" class="container" style="max-width: 600px;">
         <div class="row">
           <div class="col-25">
             <label for="area">Area:</label>

@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <header>
-      <div class="title"></div>
-        <h1>Parking Management System</h1>
+      <div class="title" style="font-family: 'Courier New', Courier, monospace; color: white;">
+        <h1>Parking Space</h1>
+      </div>
     </header>
     <section class="main-content w-50 mx-auto">
       <MainNavigation />  
@@ -33,11 +34,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 40px;
-}
-.title{
-  text-align: center;
-  color: #2c3e50;
+  background-color:  #5c6ac4;
+  padding-top: 40px;
 }
 .main-content{
   text-align: center;

@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-// const BOOKING_URL = 'http://localhost:8084/api/bookings';
-
-// const BOOKING_URL = 'http://localhost:${SPRINGBOOT_PORT}/api/bookings';
-
 const BOOKING_URL = process.env.VUE_APP_BACKEND_URL + '/api/bookings';
 
 class BookingSlot {

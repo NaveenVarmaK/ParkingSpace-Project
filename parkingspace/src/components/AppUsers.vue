@@ -1,23 +1,24 @@
+
 <template>
     <div class="container bootstrap snippets bootdey">
       <div class="header">
         <h3 class="text-muted prj-name">
-          <span class="fa fa-users fa-2x"></span>
+          <span class="fa fa-users fa-2x" ></span>
         </h3>
       </div>
   
-      <div class="jumbotron" style="min-height: 400px; height: auto; min-width: 500px;">
+      <div class="jumbotron">
         <ul class="list-group">
-          <li v-for="user in users" :key="user.id" class="list-group-item user-item text-left">
-            <!-- <img class="img-circle img-user img-thumbnail" :src="getUserImage(user)" alt="User Image"> -->
+          <li v-for="user in users" :key="user.id" class="list-group-item user-item text-left" style="position:relative;display: flex;">
             <h3>
               <a href="#">{{ user.firstName }} {{ user.lastName }}</a><br>
             </h3>
+            <ul style="position: relative; align-items: baseline;">
             <p>
-              Car Number: {{ user.carNumber }}<br>
-              <!-- Start Time: {{ user.startTime }}<br>
-              End Time: {{ user.endTime }} -->
+              ID: {{ user.id }}<br>
+              Car No: {{ user.carNumber }}<br>
             </p>
+          </ul>
           </li>
         </ul>
       </div>
@@ -56,3 +57,14 @@
         },  
     }
 </script>
+
+<style>
+.jumbotron {
+  position: absolute;
+  min-width: 400px;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+
+</style>

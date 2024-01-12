@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" style="position: absolute; max-width: 550px;">
       <div v-for="booking in bookings" :key="booking.id" class="border border-secondary rounded p-2 mb-2">
-        <div class="top-row d-flex" style="min-width: 500px;">
+        <div class="top-row d-flex">
           <div class="fw-bold pe-3">{{ booking.user.firstName }} {{ booking.user.lastName }}</div>
           <div class="text-muted">{{ booking.user.startTime }}, {{ booking.user.endTime }}, {{ booking.slot.street }}, {{ booking.slot.area }}</div>
         </div>
@@ -18,7 +18,7 @@
           <div class="top-row d-flex">
             <div class="fw-bold pe-3">{{ booking.slot.city }}, {{ booking.slot.country }}</div>
             <div class="ms-4">
-              <span class="icon">&#x2B24;</span> Closed
+              <span class="icon" style="color:#5c6ac4 ;">&#x2B24;</span> Closed
             </div>
           </div>
         </div>

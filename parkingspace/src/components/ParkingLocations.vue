@@ -27,7 +27,7 @@
               <td class="col col-1">{{ slot.status }}</td>
               <td class="col col-1">{{ slot.isBusy }}</td>
               <td class="col col-1">
-                <button @click="deleteSlot(slot.id)">Delete</button>
+                <button type="button" class="btn btn-danger" @click="deleteSlot(slot.id)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -97,6 +97,7 @@ export default {
 }
 
 .table-responsive {
+  background-color: black;
   position: absolute;
   top: 50%;
   left:50%;
