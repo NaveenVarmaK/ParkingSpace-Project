@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div class="container">
       <div v-for="booking in bookings" :key="booking.id" class="border border-secondary rounded p-2 mb-2">
         <div class="top-row d-flex" style="min-width: 500px;">
           <div class="fw-bold pe-3">{{ booking.user.firstName }} {{ booking.user.lastName }}</div>
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
   </template>
   
   <script>
@@ -52,13 +52,13 @@
         }
       },
     },
-    created() { // Corrected the typo from Created to created
+    created() {
       this.getBookings();
     },
   };
   </script>
   
   <style>
-  /* Add your styling here */
+
   </style>
   

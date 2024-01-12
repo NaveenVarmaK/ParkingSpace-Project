@@ -3,7 +3,6 @@
       <div class="header">
         <h3 class="text-muted prj-name">
           <span class="fa fa-users fa-2x"></span>
-          Users
         </h3>
       </div>
   

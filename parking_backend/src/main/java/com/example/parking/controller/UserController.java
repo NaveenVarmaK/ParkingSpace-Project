@@ -46,8 +46,9 @@ public class UserController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
+
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
+    public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
         Optional<User> userOptional = this.repository.findById(id);
 
         if (userOptional.isEmpty()) {
@@ -57,12 +58,18 @@ public class UserController {
             User user = userOptional.get();
             List<Booking> bookings = bookingRepository.findByUser(user);
 
+            if (!bookings.isEmpty()) {
+                logger.warn("User with ID " + id + " is associated with bookings. Cannot delete.");
+                return new ResponseEntity<>("User is associated with bookings. Cannot delete.", HttpStatus.BAD_REQUEST);
+            }
+
             this.bookingRepository.deleteAll(bookings);
             this.repository.deleteById(id);
             logger.info("User deleted successfully. User ID: " + id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") long id) {
