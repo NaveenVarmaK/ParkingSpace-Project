@@ -97,7 +97,6 @@ export default {
 }
 
 .table-responsive {
-  background-color: black;
   position: absolute;
   top: 50%;
   left:50%;
