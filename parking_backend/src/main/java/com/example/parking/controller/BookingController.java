@@ -1,20 +1,29 @@
 package com.example.parking.controller;
 
 import com.example.parking.models.Booking;
+import com.example.parking.models.CarParks;
 import com.example.parking.models.Slot;
 import com.example.parking.repositories.BookingRepository;
+import com.example.parking.repositories.CarParksRepository;
 import com.example.parking.repositories.SlotRepository;
 import com.example.parking.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.parking.models.User;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
 
 @Tag(name = "Booking", description = "Booking management APIs")
@@ -34,6 +43,9 @@ public class BookingController {
 
     @Autowired
     public SlotRepository slotsRepository;
+
+    @Autowired
+    public CarParksRepository carParksRepository;
 
     @GetMapping("/bookings")
     public ResponseEntity<List<Booking>> getBookings() {
@@ -103,5 +115,40 @@ public class BookingController {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @RequestMapping(path = "/upload/uk", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty");
+        }
+        carParksRepository.deleteAll();
+
+        try (Reader reader = new InputStreamReader(file.getInputStream())) {
+            Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader("Carpark Name", "postcode", "description", "easting", "northing").withFirstRecordAsHeader().parse(reader);
+
+            for (CSVRecord record : records) {
+                System.out.println("Record: " + record.toString());
+                CarParks carPark = new CarParks();
+                carPark.setCarparkName(record.get("\uFEFFCarpark Name"));
+                logger.info("Car Park Name: " + record.get("\uFEFFCarpark Name"));
+                carPark.setPostcode(record.get("Postcode"));
+                logger.info("Postcode: " + record.get("Postcode"));
+                carPark.setDescription(record.get("Description"));
+                logger.info("Description: " + record.get("Description"));
+                carPark.setEasting(record.get("EASTING"));
+                logger.info("Easting: " + record.get("EASTING"));
+                carPark.setNorthing(record.get("NORTHING"));
+                logger.info("Northing: " + record.get("NORTHING"));
+
+                carParksRepository.save(carPark); // carParksRepository is an instance of a Spring Data JPA repository for CarParks
+            }
+
+            return ResponseEntity.ok("File uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
+        }
+    }
+
+
 }
 
