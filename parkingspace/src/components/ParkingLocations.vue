@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="Parking-Slot">
     <div class="d-flex mb-2"></div>
     <div v-if="loading">Loading...</div>
@@ -163,4 +163,4 @@ export default {
     box-sizing: border-box;
   }
 }
-</style>
+</style> -->

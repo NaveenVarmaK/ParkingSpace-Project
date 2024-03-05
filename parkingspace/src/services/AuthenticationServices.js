@@ -34,7 +34,7 @@ class AuthenticationService {
 //   -H 'accept: */*' \
 //   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzcmk1IiwiaWF0IjoxNzA4NDE0NzY1LCJleHAiOjE3MDg0MTY1NjV9.W-lmH9hWU7awVpzhaCjePG6wjSbCSyBwCaVxeaMbxDg'
 
-axios.get("http://localhost:8084/auth/user/userProfile", {
+axios.get("http://localhost:8080/auth/user/userProfile", {
     headers: {
     'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzcmk1IiwiaWF0IjoxNzA4NDE0NzY1LCJleHAiOjE3MDg0MTY1NjV9.W-lmH9hWU7awVpzhaCjePG6wjSbCSyBwCaVxeaMbxDg',
     'accept': '*/*'
@@ -59,40 +59,73 @@ axios.get("http://localhost:8084/auth/user/userProfile", {
     );
   }
 
-  isLogin(){
+  // isLogin(){
     // eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzcmk1IiwiaW…1NjV9.W-lmH9hWU7awVpzhaCjePG6wjSbCSyBwCaVxeaMbxDg
     // console.log("login is", localStorage.getItem('token'));
     // replace "" in bearer token
-    const token = localStorage.getItem('token').replace(/"/g, '').replace(/^"|"$/g, '');
-    console.log("token1 is", token);
-    const headers = {
-        'Authorization': 'Bearer ' + token
-    }
-    console.log("headers is", headers);
-    axios.get(API_URL_LOGIN, {
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json',
-        'accept': '*/*'
-      }
-    }).then(response => {
-        if (response.data) {
-            console.log(response.data);
+  //   const token = localStorage.getItem('token').replace(/"/g, '').replace(/^"|"$/g, '');
+  //   console.log("token1 is", token);
+  //   const headers = {
+  //       'Authorization': 'Bearer ' + token
+  //   }
+  //   console.log("headers is", headers);
+  //   axios.get(API_URL_LOGIN, {
+  //     headers: {
+  //       'Authorization': 'Bearer ' + token,
+  //       'Content-Type': 'application/json',
+  //       'accept': '*/*'
+  //     }
+  //   }).then(response => {
+  //       if (response.data) {
+  //           console.log(response.data);
 
-            return true;
-        }
-        console.log(response.data);
-        return false;
-        }
-    ).catch(error => {
-        console.log("error in login")
-        console.log(error)
+  //           return true;
+  //       }
+  //       console.log(response.data);
+  //       return false;
+  //       }
+  //   ).catch(error => {
+  //       console.log("error in login")
+  //       console.log(error)
+  //       return false;
+  //   }
+  //   );
+  // }
+  isLogin(){
+    const token = localStorage.getItem('token');
+    if (token) {
+        const cleanedToken = token.replace(/"/g, '').replace(/^"|"$/g, '');
+        const headers = {
+            'Authorization': 'Bearer ' + cleanedToken
+        };
+        console.log("headers is", headers);
+        axios.get(API_URL_LOGIN, {
+            headers: {
+                'Authorization': 'Bearer ' + cleanedToken,
+                'Content-Type': 'application/json',
+                'accept': '*/*'
+            }
+        }).then(response => {
+            if (response.data) {
+                console.log(response.data);
+                return true;
+            }
+            console.log(response.data);
+            return false;
+        }).catch(error => {
+            console.log("error in login");
+            console.log(error);
+            return false;
+        });
+    } else {
+        console.log("Token not found in localStorage");
         return false;
     }
-    );
-  }
 }
 
 
+
+
+}
 
 export default new AuthenticationService();
