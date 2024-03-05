@@ -8,7 +8,7 @@
       <a class="nav-link" :class="{ active: activeTab === 'registration' }" href="#" @click="showRegistration" :style="{ color: activeTab === 'registration' ? ' #5c6ac4' : 'white' }">Registration</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" :class="{ active: activeTab === 'parking' }" href="#" @click="showParkingLocations" :style="{ color: activeTab === 'parking' ? ' #5c6ac4' : 'white' }">Parking Locations</a>
+      <a class="nav-link" :class="{ active: activeTab === 'parking' }" href="#" @click="showNewParkingLocations" :style="{ color: activeTab === 'parking' ? ' #5c6ac4' : 'white' }">Parking Locations</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" :class="{ active: activeTab === 'createParking' }" href="#" @click="showCreateParkingSlots" :style="{ color: activeTab === 'createParking' ? ' #5c6ac4' : 'white' }">Create Parking Slots</a>
@@ -26,7 +26,7 @@
       <RegistrationPage />
     </div>
     <div v-if="activeTab === 'parking'">
-      <ParkingLocations />
+      <NewParkingLocations />
     </div>
     <div v-else-if="activeTab === 'createParking'">
       <CreateParkingSlots />
@@ -38,15 +38,10 @@
       <AppUsers />
     </div>
   </ul>
-  <!-- Modal for Login
-  <b-modal v-model="showLoginModal" title="Login" @hide="resetActiveTab">
-      <LoginPage @authenticated="closeLoginModal" />
-    </b-modal>
-  </div> -->
 </template>
 
 <script>
-import ParkingLocations from './ParkingLocations.vue';
+import NewParkingLocations from './NewParkingLocations.vue';
 import CreateParkingSlots from './CreateParkingSlots.vue';
 import SlotBoookings from './SlotBoookings.vue';
 import AppUsers from './AppUsers.vue';
@@ -57,7 +52,7 @@ import AuthenticationService from '../services/AuthenticationServices.js';
 export default {
   name: 'MainNavigation',
   components: {
-    ParkingLocations,
+    NewParkingLocations,
     CreateParkingSlots,
     SlotBoookings,
     AppUsers,
@@ -72,22 +67,6 @@ export default {
     };
   },
   methods: {
-//     // isLogin(){
-//     //     this.loggedIn = AuthenticationService.isLogin
-//     // },
-// //show parking locations only if user is logged in after loggin show parking locations
-    showParkingLocations() {
-//       if (this.loggedIn) {
-//         this.activeTab = 'parking';
-//       } else {
-//         this.activeTab = 'login';
-//       }
-
-
-      this.activeTab = 'parking';
-      console.log('Parking Locations tab clicked!');
-
-    },
     showCreateParkingSlots() {
       this.activeTab = 'createParking';
       console.log('Create Parking Slots tab clicked!');
@@ -108,13 +87,10 @@ export default {
       this.activeTab = 'registration';
       console.log('Registration tab clicked!');
     },
-    // closeLoginModal() {
-    //   this.showLoginModal = false;
-    // },
-    // // Reset activeTab when modal is closed
-    // resetActiveTab() {
-    //   this.activeTab = 'defaultTab';
-    // },
+    showNewParkingLocations() {
+      this.activeTab = 'parking';
+      console.log('New Parking Locations tab clicked!');
+    },
   },
 };
 </script>
