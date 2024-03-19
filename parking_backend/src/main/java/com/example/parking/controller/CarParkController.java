@@ -1,6 +1,6 @@
 package com.example.parking.controller;
+
 import com.example.parking.models.CarParks;
-import com.example.parking.models.Slot;
 import com.example.parking.repositories.CarParksRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
+
 @Tag(name = "CarPark", description = "CarPark management APIs")
 @RestController
 @RequestMapping("/api")
@@ -33,7 +34,7 @@ public class CarParkController {
 
     @Autowired
     public CarParksRepository carParksRepository;
-    
+
     @GetMapping("/carparks")
     public ResponseEntity<List<CarParks>> getCarParks() {
         logger.info("Get car parks request has been made");
@@ -96,5 +97,21 @@ public class CarParkController {
         }
     }
 
-    
+    //     Example method to update status based on sensor data
+    @PostMapping("/carparks/updateStatus")
+    public ResponseEntity<HttpStatus> createCarPark(
+            @PathVariable("id") long id, @PathVariable("status") String status) {
+        if (this.carParksRepository.findById(id).isEmpty()) {
+            logger.debug("Cannot find the car park with id: " + id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            com.example.parking.models.CarParks existingCarPark = this.carParksRepository.findById(id).get();
+            existingCarPark.setStatus(status);
+            com.example.parking.models.CarParks updatedCarPark = this.carParksRepository.save(existingCarPark);
+            logger.info("Car park updated successfully. Car park ID: " + updatedCarPark.getId());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+    }
+
 }
