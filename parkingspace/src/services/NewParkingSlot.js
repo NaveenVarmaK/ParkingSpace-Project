@@ -31,7 +31,6 @@ class NewParkingSlot {
         console.log("get all slots")
         console.log(carparks)
         console.log(process.env)
-        console.log("hhghgfhg")
         return axios.get(carparks, { headers: {} });
     }
 
