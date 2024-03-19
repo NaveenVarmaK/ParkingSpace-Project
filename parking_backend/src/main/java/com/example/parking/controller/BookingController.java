@@ -81,7 +81,7 @@ public class BookingController {
     }
 
     @PostMapping("/bookings")
-    public ResponseEntity<Booking> createBooking(@RequestParam long userId, @RequestParam long slotId) {
+    public ResponseEntity<Booking> createBooking(@RequestParam long userId, @RequestParam long slotId) throws Exception {
         if (this.userRepository.findById(userId).isEmpty()) {
             logger.debug("Cannot find the user with id: " + userId);
             return ResponseEntity.notFound().build();
@@ -92,7 +92,11 @@ public class BookingController {
         }
 
         User user = this.userRepository.findById(userId).get();
-        Slot slot = this.slotsRepository.findById(slotId).get();
+        CarParks slot = this.slotsRepository.findById(slotId).get();
+
+        if (slot == null){
+            throw new Exception("Slot not found");
+        }
 
         Booking booking = new Booking();
         booking.setUser(user);

@@ -25,6 +25,6 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.EAGER)  // Assuming you want a lazy fetch type
     @JoinColumn(name = "slot_id", nullable = false)
-    private Slot slot;
+    private CarParks slot;
 
 }
