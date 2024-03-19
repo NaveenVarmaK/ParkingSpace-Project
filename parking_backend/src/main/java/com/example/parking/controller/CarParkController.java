@@ -1,6 +1,6 @@
 package com.example.parking.controller;
+
 import com.example.parking.models.CarParks;
-import com.example.parking.models.Slot;
 import com.example.parking.repositories.CarParksRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,19 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
+
 @Tag(name = "CarPark", description = "CarPark management APIs")
 @RestController
 @RequestMapping("/api")
@@ -33,7 +27,7 @@ public class CarParkController {
 
     @Autowired
     public CarParksRepository carParksRepository;
-    
+
     @GetMapping("/carparks")
     public ResponseEntity<List<CarParks>> getCarParks() {
         logger.info("Get car parks request has been made");
@@ -95,6 +89,4 @@ public class CarParkController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    
 }
